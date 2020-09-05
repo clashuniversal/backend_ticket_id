@@ -1,0 +1,14 @@
+{
+    "manifest_version": 2,
+    "name" : "Switcher",
+    "version": "1.1",
+    "browser_action":{
+        "default_popup":"popup.html"
+    },
+    "permissions":["tabs","activeTab","cookies","https://*.freshdesk.com/*"],
+    "background": {
+            "scripts": ["background.js"],
+            "persistent": false
+        }
+    
+}
