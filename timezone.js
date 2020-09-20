@@ -15,7 +15,7 @@ months = {
 values = Array.from(document.getElementsByClassName('ticket-details__item__header'))
 // console.log(created_info)
   values.forEach(e =>{
-    time_string = e.children[2].firstElementChild.innerText.match(/\((.*)\)/g)
+    time_string = e.innerText.match(/\((.*)\)/g)
     time_string = time_string[0].split(/\s(?=P|A)/)
     // console.log(time_string)
     var converted_date = extract_date_format(time_string[0])
@@ -26,8 +26,8 @@ values = Array.from(document.getElementsByClassName('ticket-details__item__heade
       converted_pm_time = convert_pm(pm_time)
       // console.log(converted_pm_time)
       // console.log(convert_date_string(converted_date,converted_pm_time))
-      changed_value = e.children[2].firstElementChild.innerText.replace(/\((.*)\)/g,convert_date_string(converted_date,converted_pm_time))
-      e.children[2].firstElementChild.innerText = changed_value
+      changed_value = e.innerText.replace(/\((.*)\)/g,convert_date_string(converted_date,converted_pm_time))
+      e.innerText = changed_value
     }
     else
     {
@@ -35,8 +35,8 @@ values = Array.from(document.getElementsByClassName('ticket-details__item__heade
       // console.log(am_time)
       am_time = convert_hours_to_two_digits(am_time)
       // console.log(convert_date_string(converted_date,am_time))
-      changed_value = e.children[2].firstElementChild.innerText.replace(/\((.*)\)/g,convert_date_string(converted_date,converted_pm_time))
-      e.children[2].firstElementChild.innerText = changed_value
+      changed_value = e.innerText.replace(/\((.*)\)/g,convert_date_string(converted_date,am_time))
+      e.innerText = changed_value
 
 
     }
