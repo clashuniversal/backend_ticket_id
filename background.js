@@ -1,11 +1,10 @@
 chrome.runtime.onMessage.addListener(
      function(request,sender,sendResponse)
     {
+    console.log(request.id)
       //Regular Expression 
-      var regexp = /https:\/\/.*.freshdesk.com\/a\/tickets\/*/
+      var regexp = /https:\/\/.*.*.*\/a\/tickets\/*/
       var match = regexp.exec(request.url)
-      console.log(match)
-       console.log(request.url)
       if(match != null)
       {
   var backend_id = 0;
@@ -43,8 +42,13 @@ chrome.runtime.onMessage.addListener(
        var xml_response = api_call.responseXML
        var parsed_value = xml_parser.parseFromString(serialzed_xml,"text/xml");
            var  backend_id = parsed_value.getElementsByTagName("id")[0].childNodes[0].nodeValue
-          console.log(backend_id)
-          sendResponse({id: backend_id, display_id: modified_url[5]})
+           var time = parsed_value.getElementsByTagName("created-at")[0].childNodes[0].nodeValue
+          // var list_of_times = []
+          // time.forEach(time_value => {
+          //   list_of_times.push(time_value.textContent)
+          // })
+          // console.log(list_of_times)
+          sendResponse({id: backend_id, display_id: modified_url[5], url_flag: true,time: time})
 
         }
 
@@ -54,12 +58,15 @@ chrome.runtime.onMessage.addListener(
     api_call.send()
      })
     }
-    else
-    {
-      sendResponse({id: 'There is no Valid Backend Ticket ID to fetch', display_id: 'The Current URL is not a Valid Freshdesk URL'})
-    }
-return true
-//This is required to sendResponse asynchronously after we use Chrome.getall cookies call else its going to be synchronous and send an empty value
+   else
+   {
+      sendResponse({id: 'Cannot find a valid Backend ticket ID', display_id: 'Not a valid ticket URL', url_flag: false})
+   }
+  //This is required to sendResponse asynchronously after we use Chrome.getall cookies call else its going to be synchronous and send an empty value
+
+  return true
+
+   
  })
  
 
