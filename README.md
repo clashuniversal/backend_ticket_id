@@ -4,6 +4,7 @@ How does the extension work:
 1. Load a ticket URL in a Chrome tab
 2. Once the URL is loaded, click on the Chrome extension
 3. The backend ticket ID will be copied automatically
+4. A button to change the Timestamps to the System's Local time(Mostly IST) is given.
 
 
 Things to take care when you use the extension:
