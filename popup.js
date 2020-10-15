@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event){
                 // console.log(url_flag)
                  if(!url_flag) document.getElementById("change_timezone").disabled = true
                  ticket_timezone = response.time.match(/\+.*/)
+                 console.log(ticket_timezone)
          })
 
     })
