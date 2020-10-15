@@ -37,8 +37,6 @@ values = Array.from(document.getElementsByClassName('ticket-details__item__heade
       // console.log(convert_date_string(converted_date,am_time))
       changed_value = e.innerText.replace(/\((.*)\)/g,convert_date_string(converted_date,am_time))
       e.innerText = changed_value
-
-
     }
   })
 
@@ -46,7 +44,7 @@ values = Array.from(document.getElementsByClassName('ticket-details__item__heade
 function convert_pm(time)
 {
   time = time.split(":")
-  console.log(time)
+  // console.log(time)
   if(parseInt(time[0]) != 12)
   {
     time[0] = parseInt(time[0])+12
@@ -62,14 +60,16 @@ function convert_pm(time)
 function extract_date_format(value)
 {
   value = value.split(" ")
-  extracted_date = value[3] + "-" + months[value[2]] + "-" + value[1]
+  extracted_date = value[3] + "-" + months[value[2]] + "-" + (parseInt(value[1]) <  10 ? "0"+value[1] : value[1])
+  console.log(extracted_date)
   return extracted_date
 }
 
 function convert_date_string(date, time)
 {
+  // console.log(time_value)
   format = date+"T"+time+':'+"00"+time_value
-  console.log(format)
+  // console.log(format)
   local_date = new Date(format)
   return local_date
 }
@@ -79,13 +79,9 @@ function convert_hours_to_two_digits(hour_value)
  if(parseInt(hour_value) < 10) return "0"+hour_value
  else return hour_value
 }
-// values.forEach(e =>{
-    
-//     console.log(e.children[2].firstElementChild.innerText)  
-//   })
-// time_value.forEach(element => {
-//      var converted_time = new Date(element)
-//     console.log(element)
-//     values = Array.from(document.getElementsByClassName('ticket-details__item__header'))
-// });
+
+function two_digit_day(day)
+{
+  return parseInt(day) <  10 ? "0"+day : day
+}
 
